@@ -15,7 +15,13 @@
 
     <!-- Connect to the api and retrieve search results -->
 
-    <div class="playlist"></div>
+    <div ng-controller="PlaylistCtrl" class="playlist">
+      <ol class="playlist">
+        <li class="song" ng-repeat="song in playlist">
+          {{ song.title }}
+        </li>
+      </ol>
+    </div>
 
     <div ng-controller="SearchCtrl" class="search">
       <div class="search-controls">
@@ -30,7 +36,7 @@
             <img ng-src="{{ result.snippet.thumbnails.high.url }}" alt="{{ result.snippet.description }}">
             <h2>
               {{ result.snippet.title }}
-              <button ng-click="addToPlaylist(result.id.videoId)">Add</button>
+              <button ng-click="addToPlaylist(result.id.videoId, result.snippet.title)">Add</button>
             </h2>
           </li>
         </ul>

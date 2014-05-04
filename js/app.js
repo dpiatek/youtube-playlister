@@ -17,6 +17,24 @@
     return state;
   }]);
 
+  module.factory('playlist', [function(){
+    var playlist = {
+      tracks: [],
+      addTrack: function(id, title) {
+        return playlist.tracks.push({
+          id: id,
+          title: title
+        });
+      }
+    };
+
+    return playlist;
+  }]);
+
+  module.controller('PlaylistCtrl', ['$scope', 'playlist', function($scope, playlist) {
+    $scope.playlist = playlist.tracks;
+  }]);
+
   module.controller('PlayerCtrl', ['$scope', '$sce', 'state', function($scope, $sce, state) {
     $scope.currentVid = function() {
       var vidId = state.getCurrentVidId();
@@ -25,7 +43,7 @@
     };
   }]);
 
-  module.controller('SearchCtrl', ['$scope', 'state', function($scope, state) {
+  module.controller('SearchCtrl', ['$scope', 'state', 'playlist', function($scope, state, playlist) {
     $scope.searchResults = null;
     $scope.nextPageToken = null;
 
@@ -57,8 +75,8 @@
       $scope.search($scope.query, true);
     };
 
-    $scope.addToPlaylist = function(id) {
-      state.setCurrentVidId(id);
+    $scope.addToPlaylist = function(id, title) {
+      playlist.addTrack(id, title);
     };
   }]);
 
