@@ -1,23 +1,34 @@
+var gapiLoaded;
+
 function load() {
   gapi.client.setApiKey('AIzaSyAFiqMW3gEMzwckXdJ14bkduSB_kDHWULM');
-  gapi.client.load('youtube', 'v3', handleAPILoaded);
+  gapi.client.load('youtube', 'v3', loaded);
 }
 
-// After the API loads, call a function to enable the search box.
-function handleAPILoaded() {
-  $('#search-button').attr('disabled', false);
+function loaded() {
+  gapiLoaded = true;
 }
 
-// Search for a specified string.
-function search() {
-  var q = $('#query').val();
-  var request = gapi.client.youtube.search.list({
-    q: q,
-    part: 'snippet'
-  });
+(function() {
 
-  request.execute(function(response) {
-    var str = JSON.stringify(response.result);
-    $('#search-container').html('<pre>' + str + '</pre>');
-  });
-}
+  var module = angular.module('yt-playlister', []);
+
+  module.controller('SearchCtrl', ['$scope', function($scope) {
+    $scope.response = {};
+
+    $scope.search = function(query) {
+      if (!gapiLoaded) return;
+      var request = gapi.client.youtube.search.list({
+        q: query,
+        part: 'snippet'
+      });
+
+      request.execute(function(response) {
+        $scope.response = response;
+        $scope.$apply();
+      });
+    };
+  }]);
+
+}());
+
