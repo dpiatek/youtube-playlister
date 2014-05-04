@@ -16,12 +16,16 @@
     <div ng-controller="SearchCtrl">
       <div>
         <input ng-model="query" type="text"/>
-        <button id="search-button" ng-click="search()">Search</button>
+        <button id="search-button" ng-click="search(query)">Search</button>
       </div>
       <div>
-        <pre>
-        {{ response | json }}
-        </pre>
+        <ul>
+          <li ng-repeat="result in searchResults">
+            <h2>{{ result.snippet.title }}</h2>
+            <img ng-src="{{ result.snippet.thumbnails.default.url }}" alt="{{ result.snippet.description }}">
+          </li>
+        </ul>
+        <button ng-click="loadMore()">Load More</button>
       </div>
     </div>
   </body>

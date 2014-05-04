@@ -14,20 +14,35 @@ function loaded() {
   var module = angular.module('yt-playlister', []);
 
   module.controller('SearchCtrl', ['$scope', function($scope) {
-    $scope.response = {};
+    $scope.searchResults = null;
+    $scope.nextPageToken = null;
 
-    $scope.search = function(query) {
-      if (!gapiLoaded) return;
-      var request = gapi.client.youtube.search.list({
-        q: query,
-        part: 'snippet'
-      });
+    $scope.search = function(query, append) {
+      var params = {}, request;
+      if (!gapiLoaded || !query) return;
+
+      params.q = query;
+      params.part = 'snippet';
+      if ($scope.nextPageToken) params.pageToken = $scope.nextPageToken;
+
+      request = gapi.client.youtube.search.list(params);
 
       request.execute(function(response) {
-        $scope.response = response;
+        if (append) {
+          $scope.searchResults = $scope.searchResults.concat(response.items);
+        } else {
+          $scope.searchResults = response.items;
+        }
+
+        $scope.nextPageToken = response.nextPageToken;
         $scope.$apply();
       });
     };
+
+    $scope.loadMore = function() {
+      if (!$scope.query) return;
+      $scope.search($scope.query, true);
+    }
   }]);
 
 }());
