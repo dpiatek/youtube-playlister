@@ -1,4 +1,6 @@
 var gapiLoaded;
+var player;
+var iframeApiLoaded;
 
 function load() {
   gapi.client.setApiKey('AIzaSyAFiqMW3gEMzwckXdJ14bkduSB_kDHWULM');
@@ -7,4 +9,9 @@ function load() {
 
 function loaded() {
   gapiLoaded = true;
+}
+
+
+function onYouTubeIframeAPIReady() {
+  iframeApiLoaded = true;
 }

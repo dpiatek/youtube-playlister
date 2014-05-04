@@ -8,7 +8,13 @@
     <script src="bower_components/jquery/dist/jquery.js"></script>
     <script src="bower_components/angular/angular.js"></script>
     <script src="js/init.js"></script>
+    <script src="js/controllers/search.js"></script>
+    <script src="js/controllers/player.js"></script>
+    <script src="js/controllers/playlist.js"></script>
+    <script src="js/services/player.js"></script>
+    <script src="js/services/playlist.js"></script>
     <script src="js/app.js"></script>
+    <script src="https://www.youtube.com/iframe_api"></script>
     <script src="https://apis.google.com/js/client.js?onload=load"></script>
   </head>
   <body ng-app="yt-playlister">
@@ -17,8 +23,9 @@
 
     <div ng-controller="PlaylistCtrl" class="playlist">
       <ol class="playlist">
-        <li class="song" ng-repeat="song in playlist">
-          {{ song.title }}
+        <li class="video" ng-repeat="video in playlist">
+          {{ video.title }}
+          <button ng-click="playVideo(video.id, $index)">Play</button>
         </li>
       </ol>
     </div>
@@ -44,8 +51,9 @@
       </div>
     </div>
 
-    <div ng-controller="PlayerCtrl" class="player">
-      <iframe src="{{ currentVid() }}" frameborder="0" width="480" height="360"></iframe>
+    <div ng-controller="PlayerCtrl" class="player-wrapper">
+      <div id="player"></div>
+      <!-- <iframe src="{{ currentVid() }}" frameborder="0" width="480" height="360"></iframe> -->
     </div>
 
   </body>

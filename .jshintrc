@@ -2,6 +2,7 @@
   "globals": {
     "angular": false,
     "gapi": false,
-    "gapiLoaded": false
+    "gapiLoaded": false,
+    "YT": false
   }
 }
