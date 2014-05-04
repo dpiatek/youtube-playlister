@@ -1,19 +1,31 @@
-var gapiLoaded;
-
-function load() {
-  gapi.client.setApiKey('AIzaSyAFiqMW3gEMzwckXdJ14bkduSB_kDHWULM');
-  gapi.client.load('youtube', 'v3', loaded);
-}
-
-function loaded() {
-  gapiLoaded = true;
-}
-
 (function() {
+  'use strict';
 
   var module = angular.module('yt-playlister', []);
 
-  module.controller('SearchCtrl', ['$scope', function($scope) {
+  module.factory('state', [function() {
+    var state = {
+      setCurrentVidId: function(id) {
+        this.currentVidId = id;
+      },
+      getCurrentVidId: function() {
+        return this.currentVidId;
+      },
+      currentVidId: null
+    };
+
+    return state;
+  }]);
+
+  module.controller('PlayerCtrl', ['$scope', '$sce', 'state', function($scope, $sce, state) {
+    $scope.currentVid = function() {
+      var vidId = state.getCurrentVidId();
+      if (!vidId) return;
+      return $sce.trustAsResourceUrl('http://www.youtube.com/v/' + vidId + '&version=3');
+    };
+  }]);
+
+  module.controller('SearchCtrl', ['$scope', 'state', function($scope, state) {
     $scope.searchResults = null;
     $scope.nextPageToken = null;
 
@@ -23,6 +35,7 @@ function loaded() {
 
       params.q = query;
       params.part = 'snippet';
+      params.type = 'video';
       if ($scope.nextPageToken) params.pageToken = $scope.nextPageToken;
 
       request = gapi.client.youtube.search.list(params);
@@ -42,7 +55,11 @@ function loaded() {
     $scope.loadMore = function() {
       if (!$scope.query) return;
       $scope.search($scope.query, true);
-    }
+    };
+
+    $scope.addToPlaylist = function(id) {
+      state.setCurrentVidId(id);
+    };
   }]);
 
 }());
