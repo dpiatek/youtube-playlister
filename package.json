@@ -1,0 +1,19 @@
+{
+  "name": "yt-playlister",
+  "version": "0.0.0",
+  "description": "youtube ui for simultaneous search and playlist playback",
+  "main": "index.html",
+  "dependencies": {
+    "grunt": "~0.4.4"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "youtube",
+    "angular"
+  ],
+  "author": "do.piatek@gmail.com",
+  "license": "MIT"
+}
