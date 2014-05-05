@@ -4,7 +4,8 @@
   "description": "youtube ui for simultaneous search and playlist playback",
   "main": "index.html",
   "dependencies": {
-    "grunt": "~0.4.4"
+    "grunt": "~0.4.4",
+    "grunt-sass": "~0.12.1"
   },
   "devDependencies": {},
   "scripts": {

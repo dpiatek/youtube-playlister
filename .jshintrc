@@ -3,6 +3,7 @@
     "angular": false,
     "gapi": false,
     "gapiLoaded": false,
-    "YT": false
+    "YT": false,
+    "module": false
   }
 }
