@@ -3,6 +3,8 @@
   <head>
     <meta charset="utf-8">
     <title>Youtube Playlister</title>
+    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css">
+    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap-theme.css">
     <link rel="stylesheet" href="css/style.css">
     <link href='http://fonts.googleapis.com/css?family=Roboto:400,400italic,700,500,300,300italic' rel='stylesheet' type='text/css'>
     <script src="bower_components/jquery/dist/jquery.js"></script>
@@ -19,41 +21,58 @@
   </head>
   <body ng-app="yt-playlister">
 
-    <!-- Connect to the api and retrieve search results -->
+      <div class="container-fluid">
 
-    <div ng-controller="PlaylistCtrl" class="playlist">
-      <ol class="playlist">
-        <li class="video" ng-repeat="video in playlist">
-          {{ video.title }}
-          <button ng-click="playVideo(video.id, $index)">Play</button>
-        </li>
-      </ol>
-    </div>
+        <div class="row">
 
-    <div ng-controller="SearchCtrl" class="search">
-      <div class="search-controls">
-        <form>
-          <input ng-model="query" type="text"/>
-          <button id="search-button" ng-click="search(query)">Search</button>
-        </form>
+          <div ng-controller="SearchCtrl" class="search col-md-4">
+            <div class="search-controls">
+              <form ng-submit="search(query)">
+                <div class="form-group">
+                  <input class="form-control" ng-model="query" type="search" placeholder="Search ..." />
+                </div>
+              </form>
+            </div>
+            <div class="search-results" ng-show="searchResults">
+              <ul>
+                <li ng-repeat="result in searchResults" ng-click="addToPlaylist(result.id.videoId, result.snippet.title)">
+                  <div class="media">
+                    <div class="pull-left">
+                      <img ng-src="{{ result.snippet.thumbnails.default.url }}" alt="{{ result.snippet.description }}" class="media-object">
+                    </div>
+                    <div class="media-body">
+                      <p class="media-heading">
+                        {{ result.snippet.title }}
+                      </p>
+                    </div>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <button ng-click="loadMore()" class="btn btn-block" ng-show="searchResults">Load More</button>
+          </div>
+
+          <div class="player-and-playlist col-md-8">
+
+            <div ng-controller="PlayerCtrl" class="player-wrapper">
+              <div id="player">
+                <span class="glyphicon glyphicon-play"></span>
+              </div>
+            </div>
+
+            <div ng-controller="PlaylistCtrl" class="playlist">
+              <ol class="playlist">
+                <li class="video clearfix" ng-repeat="video in playlist">
+                  <button ng-click="playVideo(video.id, $index)" class="btn">Play</button>
+                  <p>{{ video.title }}</p>
+                </li>
+              </ol>
+            </div>
+
+          </div>
+
       </div>
-      <div class="search-results">
-        <ul>
-          <li ng-repeat="result in searchResults">
-            <img ng-src="{{ result.snippet.thumbnails.high.url }}" alt="{{ result.snippet.description }}">
-            <h2>
-              {{ result.snippet.title }}
-              <button ng-click="addToPlaylist(result.id.videoId, result.snippet.title)">Add</button>
-            </h2>
-          </li>
-        </ul>
-        <button ng-click="loadMore()">Load More</button>
-      </div>
-    </div>
 
-    <div ng-controller="PlayerCtrl" class="player-wrapper">
-      <div id="player"></div>
-      <!-- <iframe src="{{ currentVid() }}" frameborder="0" width="480" height="360"></iframe> -->
     </div>
 
   </body>

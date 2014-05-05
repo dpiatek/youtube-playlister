@@ -1,0 +1,30 @@
+{
+  "name": "yt-playlister",
+  "version": "0.0.0",
+  "authors": [
+    "do.piatek@gmail.com"
+  ],
+  "description": "youtube ui for simultaneous search and playlist playback",
+  "main": "index.html",
+  "moduleType": [
+    "globals"
+  ],
+  "keywords": [
+    "youtube",
+    "angular"
+  ],
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "~1.2.16",
+    "bootstrap": "~3.1.1",
+    "jquery": "~2.1.1"
+  }
+}
