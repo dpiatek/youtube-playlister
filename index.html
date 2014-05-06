@@ -9,6 +9,7 @@
     <link href='http://fonts.googleapis.com/css?family=Roboto:400,400italic,700,500,300,300italic' rel='stylesheet' type='text/css'>
     <script src="bower_components/jquery/dist/jquery.js"></script>
     <script src="bower_components/angular/angular.js"></script>
+    <script src="bower_components/angular-animate/angular-animate.js"></script>
     <script src="js/init.js"></script>
     <script src="js/controllers/search.js"></script>
     <script src="js/controllers/player.js"></script>
@@ -35,7 +36,7 @@
             </div>
             <div class="search-results" ng-show="searchResults">
               <ul>
-                <li ng-repeat="result in searchResults" ng-click="addToPlaylist(result.id.videoId, result.snippet.title)">
+                <li ng-repeat="result in searchResults" ng-click="addToPlaylist(result.id.videoId, result.snippet.title)" class="search-result">
                   <div class="media">
                     <div class="pull-left">
                       <img ng-src="{{ result.snippet.thumbnails.default.url }}" alt="{{ result.snippet.description }}" class="media-object">
@@ -64,7 +65,7 @@
               <ol class="playlist">
                 <li class="video clearfix" ng-repeat="video in playlist">
                   <button ng-click="playVideo(video.id, $index)" class="btn">Play</button>
-                  <p>{{ video.title }}</p>
+                  <p>{{ $index + 1 + '. ' + video.title }}</p>
                 </li>
               </ol>
             </div>

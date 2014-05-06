@@ -4,7 +4,7 @@
   var module = angular.module('SearchCtrl', []);
 
   module.controller('SearchCtrl', ['$scope', 'playlist', function($scope, playlist) {
-    $scope.searchResults = null;
+    $scope.searchResults = [];
     $scope.nextPageToken = null;
 
     $scope.search = function(query, append) {
@@ -20,7 +20,7 @@
 
       request.execute(function(response) {
         if (append) {
-          $scope.searchResults = $scope.searchResults.concat(response.items);
+          $scope.searchResults = response.items.concat($scope.searchResults);
         } else {
           $scope.searchResults = response.items;
         }

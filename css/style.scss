@@ -2,6 +2,35 @@ $border-color: #eee;
 $border: 1px solid $border-color;
 $border-radius: 7px;
 
+/*.search-result.ng-enter,
+.search-result.ng-leave,
+.search-result.ng-move {
+  transition: 0.5s linear all;
+}
+
+.search-result.ng-enter {
+  opacity: 0;
+}
+.search-result.ng-enter.ng-enter-active {
+  opacity: 1;
+}*/
+/*
+.search-result.ng-leave {
+  left:0;
+  opacity:1;
+}
+.search-result.ng-leave.ng-leave-active {
+  left:-10px;
+  opacity:0;
+}
+
+.search-result.ng-move {
+  opacity:0.5;
+}
+.search-result.ng-move.ng-move-active {
+  opacity:1;
+}*/
+
 
 body {
   font-family: 'Roboto', sans-serif;
