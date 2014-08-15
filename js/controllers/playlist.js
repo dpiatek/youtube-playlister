@@ -1,7 +1,7 @@
 (function () {
   'use strict';
 
-  var module = angular.module('PlaylistCtrl', []);
+  var module = angular.module('yt-playlister');
 
   module.controller('PlaylistCtrl', ['$scope', 'playlist', 'player', function($scope, playlist, player) {
     $scope.playlist = playlist.tracks;

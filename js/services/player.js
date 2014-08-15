@@ -1,7 +1,7 @@
 (function () {
   'use strict';
 
-  var module = angular.module('player', []);
+  var module = angular.module('yt-playlister');
 
   module.factory('player', ['playlist', function(playlist) {
     var iframePlayer, currentIndex;

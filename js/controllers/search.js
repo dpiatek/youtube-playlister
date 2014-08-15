@@ -1,7 +1,7 @@
 (function () {
   'use strict';
 
-  var module = angular.module('SearchCtrl', []);
+  var module = angular.module('yt-playlister');
 
   module.controller('SearchCtrl', ['$scope', 'playlist', function($scope, playlist) {
     $scope.searchResults = [];

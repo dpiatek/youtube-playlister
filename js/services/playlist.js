@@ -1,7 +1,7 @@
 (function () {
   'use strict';
 
-  var module = angular.module('playlist', []);
+  var module = angular.module('yt-playlister');
 
   module.factory('playlist', [function(){
     var playlist = {
@@ -21,6 +21,3 @@
   }]);
 
 })();
-
-
-
