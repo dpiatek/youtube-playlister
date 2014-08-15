@@ -19,11 +19,15 @@ module.exports = function(grunt) {
       html: 'dist/index.html'
     },
     copy: {
-      build: {
+      index: {
         dest: 'dist/index.html',
         src: 'index.html'
+      },
+      apiKey: {
+        src: 'js/yt_pl_key.js',
+        dest: 'dist/js/yt_pl_key.js'
       }
-    }
+    },
   });
 
   // Load the plugin that provides the "uglify" task.

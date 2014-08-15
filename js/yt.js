@@ -3,14 +3,13 @@ var player;
 var iframeApiLoaded;
 
 function load() {
-  gapi.client.setApiKey('AIzaSyAFiqMW3gEMzwckXdJ14bkduSB_kDHWULM');
+  gapi.client.setApiKey(YT_PL_KEY);
   gapi.client.load('youtube', 'v3', loaded);
 }
 
 function loaded() {
   gapiLoaded = true;
 }
-
 
 function onYouTubeIframeAPIReady() {
   iframeApiLoaded = true;
