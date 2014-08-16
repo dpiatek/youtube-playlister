@@ -5,7 +5,8 @@
   "main": "index.html",
   "dependencies": {
     "connect": "~3.1.1",
-    "serve-static": "~1.5.2"
+    "serve-static": "~1.5.2",
+    "morgan": "~1.2.2"
   },
   "devDependencies": {
     "grunt": "~0.4.4",
