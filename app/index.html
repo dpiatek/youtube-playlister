@@ -72,7 +72,7 @@
               <ol class="playlist">
                 <li class="video clearfix" ng-repeat="video in playlist">
                   <button ng-click="playVideo(video.id, $index)" class="btn">Play</button>
-                  <p>{{ $index + 1 + '. ' + video.title }}</p>
+                  <p ng-class="{ 'video-current': player.currentIndex == $index }">{{ $index + 1 + '. ' + video.title }}</p>
                 </li>
               </ol>
             </div>

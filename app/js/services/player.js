@@ -4,13 +4,13 @@
   var module = angular.module('yt-playlister');
 
   module.factory('player', ['playlist', function(playlist) {
-    var iframePlayer, currentIndex;
+    var iframePlayer;
 
     var player = {
       load: function(id, index) {
         if (!id || !iframeApiLoaded) return;
 
-        currentIndex = index;
+        player.currentIndex = index;
 
         if (iframePlayer) {
           iframePlayer.pauseVideo();
@@ -33,15 +33,16 @@
         }
 
         function onStateChange(event) {
-          var nextIndex = currentIndex + 1;
+          var nextIndex = player.currentIndex + 1;
           var nextTrack = playlist.getTrack(nextIndex);
 
           if (event.data === YT.PlayerState.ENDED && nextTrack) {
-            currentIndex = nextIndex;
+            player.currentIndex = nextIndex;
             iframePlayer.loadVideoById(nextTrack.id);
           }
         }
       },
+      currentIndex: null,
       currentVidId: null
     };
 
