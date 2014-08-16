@@ -13,7 +13,10 @@ module.exports = function(grunt) {
       }
     },
     useminPrepare: {
-      html: 'index.html'
+      html: 'app/index.html',
+      options: {
+        root: 'app'
+      }
     },
     usemin: {
       html: 'dist/index.html'
@@ -21,10 +24,10 @@ module.exports = function(grunt) {
     copy: {
       index: {
         dest: 'dist/index.html',
-        src: 'index.html'
+        src: 'app/index.html'
       },
       apiKey: {
-        src: 'js/yt_pl_key.js',
+        src: 'app/js/yt_pl_key.js',
         dest: 'dist/js/yt_pl_key.js'
       }
     },
